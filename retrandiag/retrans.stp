@@ -1,0 +1,7 @@
+probe tcpmib.RetransSegs {
+    printf("======\n");
+    printf("Time: %s, ", tz_ctime(gettimeofday_s()));
+    printf("local_addr: %15s, remote_addr: %15s, local_port: %5d, remote_port: %5d\n", ip_ntop(ntohl(tcpmib_local_addr(sk))), inet_get_ip_source(sk), tcpmib_local_port(sk), tcpmib_remote_port(sk));
+    printf("%s\n", execname());
+    print_backtrace();
+}
